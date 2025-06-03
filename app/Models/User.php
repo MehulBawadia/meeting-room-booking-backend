@@ -55,4 +55,14 @@ class User extends Authenticatable
             'locked_until' => 'datetime',
         ];
     }
+
+    /**
+     * The User has made many bookings.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Booking, User>
+     */
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

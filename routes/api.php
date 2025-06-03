@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\RoomAvailabilityController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,4 +17,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/logout', [AuthController::class, 'logout']);
 
     Route::get('/available-rooms', [RoomAvailabilityController::class, 'index']);
+
+    Route::post('/book-room', [BookingController::class, 'store']);
 });

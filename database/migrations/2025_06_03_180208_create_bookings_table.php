@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class, 'user_id')->constrained()->cascadeOnDelete();
             $table->foreignIdFor(MeetingRoom::class, 'meeting_room_id')->constrained()->cascadeOnDelete();
+            $table->string('name_of_meeting');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->unsignedInteger('number_of_members')->nullable();
