@@ -109,4 +109,19 @@ class AuthController extends Controller
             'user' => new UserResource($user->fresh()),
         ], 200);
     }
+
+    /**
+     * Logout the user. Delete the current access token.
+     *
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        auth()->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User successfully logged out.',
+        ], 200);
+    }
 }
