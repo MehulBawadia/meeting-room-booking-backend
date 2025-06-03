@@ -29,6 +29,7 @@ class User extends Authenticatable
         // basic: 5 bookings per day
         // advance: 7 bookings per day
         // premium: 10 bookings per day
+        'subscription_id',
         'subscription_plan',
     ];
 

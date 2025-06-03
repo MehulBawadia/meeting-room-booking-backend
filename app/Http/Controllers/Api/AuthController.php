@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Subscription;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -21,12 +22,17 @@ class AuthController extends Controller
     {
         DB::beginTransaction();
 
+        $subscription = Subscription::query()
+            ->where('name', 'free')
+            ->first();
+
         try {
             $password = bcrypt($request->input('password'));
             $user = User::create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
                 'password' => $password,
+                'subscription_id' => $subscription->id,
                 'subscription_plan' => 'free',
             ]);
 

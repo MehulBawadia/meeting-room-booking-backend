@@ -23,4 +23,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/book-room', [BookingController::class, 'store']);
 
     Route::get('/subscriptions', [SubscriptionController::class, 'index']);
+    Route::post('/subscriptions/buy', [SubscriptionController::class, 'buy']);
 });
