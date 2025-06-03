@@ -7,6 +7,7 @@ use App\Http\Resources\BookingResource;
 use App\Models\Booking;
 use App\Models\MeetingRoom;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
@@ -21,6 +22,33 @@ class BookingController extends Controller
         'advance' => 7, // Advance Plan: Max 7 bookings per day
         'premium' => 10, // Premium Plan: Max 10 bookings per day
     ];
+
+    /**
+     * Display the bookings done by the authenticated user.
+     * Filter them based on the provided values in the query params.
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function index(Request $request)
+    {
+        $user = $request->user();
+        $filter = $request->query('filter');
+        $now = now();
+
+        $bookings = $user->bookings()
+            ->when($filter === 'past', function ($filterQuery) use ($now) {
+                $filterQuery->where('end_time', '<', $now)
+                    ->latest('end_time');
+            })
+            ->when($filter === 'upcoming', function ($filterQuery) use ($now) {
+                $filterQuery->where('end_time', '>=', $now)
+                    ->oldest('start_time');
+            })
+            ->with(['meetingRoom'])
+            ->paginate(10);
+
+        return BookingResource::collection($bookings);
+    }
 
     /**
      * Store the booking details.

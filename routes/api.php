@@ -18,5 +18,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/available-rooms', [RoomAvailabilityController::class, 'index']);
 
+    Route::get('/bookings', [BookingController::class, 'index']);
     Route::post('/book-room', [BookingController::class, 'store']);
 });

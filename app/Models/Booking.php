@@ -28,6 +28,8 @@ class Booking extends Model
 
     /**
      * Get the user that owns the booking.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
@@ -36,6 +38,8 @@ class Booking extends Model
 
     /**
      * Get the meeting room that the booking is for.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function meetingRoom()
     {
