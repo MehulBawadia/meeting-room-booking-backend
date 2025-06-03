@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\MeetingRoom;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MeetingRoomSeeder extends Seeder
