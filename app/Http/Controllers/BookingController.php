@@ -6,6 +6,7 @@ use App\Http\Requests\BookingRequest;
 use App\Http\Resources\BookingResource;
 use App\Models\Booking;
 use App\Models\MeetingRoom;
+use App\Models\Subscription;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -59,8 +60,9 @@ class BookingController extends Controller
     {
         $user = $request->user();
 
-        $currentPlan = $user->plan ?? 'free';
-        $dailyLimit = $this->planLimits[$currentPlan] ?? $this->planLimits['free'];
+        $currentPlan = $user->subscription_plan ?? 'free';
+        $subscription = Subscription::find($user->subscription_id);
+        $dailyLimit = $subscription->booking_per_day;
 
         $todayBookingsCount = $user->bookings()
             ->whereDate('created_at', today())
