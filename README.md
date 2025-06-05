@@ -4,6 +4,7 @@ This is the API backend of the Meeting Room Booking application.
 
 ### Stacks used
 
+-   PHP v8.4
 -   Laravel v12.x
 -   MySQL v8.x
 
@@ -18,6 +19,10 @@ php artisan key:generate
 php artisan migrate --seed
 php artisan serve --host=localhost
 ```
+
+#### For Frontend
+
+For the frontend in Vue.js 3, [click here](https://github.com/MehulBawadia/meeting-room-booking-frontend)
 
 #### License
 
