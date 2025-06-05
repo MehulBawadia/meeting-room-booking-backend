@@ -5,8 +5,8 @@ namespace Database\Seeders;
 use App\Models\Booking;
 use App\Models\MeetingRoom;
 use App\Models\User;
-use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
+use Illuminate\Database\Seeder;
 
 class BookingTableSeeder extends Seeder
 {
