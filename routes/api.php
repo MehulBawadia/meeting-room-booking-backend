@@ -17,10 +17,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/logout', [AuthController::class, 'logout']);
 
-    Route::get('/available-rooms', [RoomAvailabilityController::class, 'index']);
+    Route::get('/meeting-rooms/available', [RoomAvailabilityController::class, 'index']);
 
-    Route::get('/bookings', [BookingController::class, 'index']);
-    Route::post('/book-room', [BookingController::class, 'store']);
+    Route::get('/meeting-rooms/my-bookings', [BookingController::class, 'index']);
+    Route::post('/meeting-rooms/book', [BookingController::class, 'store']);
 
     Route::get('/subscriptions', [SubscriptionController::class, 'index']);
     Route::post('/subscriptions/buy', [SubscriptionController::class, 'buy']);
