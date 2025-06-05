@@ -41,6 +41,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'User registered successfully.',
+                'access_token' => $user->createToken('API-Token')->plainTextToken,
                 'user' => new UserResource($user),
             ], 201);
         } catch (\Exception $e) {
