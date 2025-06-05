@@ -24,7 +24,7 @@ class BookingRequest extends FormRequest
         return [
             'meeting_room_id' => ['required', 'exists:meeting_rooms,id'],
             'name_of_meeting' => ['required', 'string', 'max:255'],
-            'start_time' => ['required', 'date_format:Y-m-d H:i:s', 'after_or_equal:now'],
+            'start_time' => ['required', 'date_format:Y-m-d H:i', 'after_or_equal:now'],
             'duration' => ['required', 'in:30,60,90'],
             'members' => ['required', 'integer', 'min:1'],
         ];
