@@ -17,6 +17,7 @@ class SubscriptionOrder extends Model
         'user_email',
         'subscription_id',
         'subscription_name',
+        'booking_per_day',
         'total_amount',
         'payment_gateway_id',
         'payment_type',
@@ -24,4 +25,14 @@ class SubscriptionOrder extends Model
         'transaction_id',
         'payment_gateway_response',
     ];
+
+    /**
+     * Subscription order belongs to a single user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User, SubscriptionOrder>
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
