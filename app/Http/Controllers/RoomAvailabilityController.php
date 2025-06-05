@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoomAvailabilityRequest;
 use App\Http\Resources\MeetingRoomResource;
 use App\Models\Booking;
 use App\Models\MeetingRoom;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class RoomAvailabilityController extends Controller
 {
@@ -15,7 +15,7 @@ class RoomAvailabilityController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request)
+    public function index(RoomAvailabilityRequest $request)
     {
         $startTime = Carbon::parse($request->start_time);
         $duration = (int) $request->duration;
