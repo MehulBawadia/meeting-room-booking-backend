@@ -21,6 +21,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/meeting-rooms/my-bookings', [BookingController::class, 'index']);
     Route::post('/meeting-rooms/book', [BookingController::class, 'store']);
+    Route::get('/meeting-rooms/daily-stats', [BookingController::class, 'myDailyStats']);
 
     Route::get('/subscriptions', [SubscriptionController::class, 'index']);
     Route::post('/subscriptions/buy', [SubscriptionController::class, 'buy']);

@@ -125,4 +125,36 @@ class BookingController extends Controller
             'data' => new BookingResource($booking->load(['user', 'meetingRoom'])),
         ], 201);
     }
+
+    /**
+     * Fetch the daily booking stats of the user.
+     *
+     * @return mixed|\Illuminate\Http\JsonResponse
+     */
+    public function myDailyStats()
+    {
+        $user = auth()->user();
+        $today = today();
+
+        $bookingPerDayCount = $user->subscriptionOrders()
+            ->latest()
+            ->first()
+            ->booking_per_day;
+
+        $todayBookingCount = $user->bookings()
+            ->whereBetween('created_at', [$today->copy()->startOfDay(), $today->copy()->endOfDay()])
+            ->count();
+
+        $data = [
+            'per_day_booking_count' => $bookingPerDayCount,
+            'today_booking_count' => $todayBookingCount,
+            'available_booking_count' => $bookingPerDayCount - $todayBookingCount,
+        ];
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Daily stats succesfully fetched.',
+            'data' => $data,
+        ]);
+    }
 }

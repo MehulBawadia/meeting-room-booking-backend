@@ -66,4 +66,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Booking::class);
     }
+
+    /**
+     * A user has many subscription orders.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<SubscriptionOrder, User>
+     */
+    public function subscriptionOrders()
+    {
+        return $this->hasMany(SubscriptionOrder::class);
+    }
 }
